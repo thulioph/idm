@@ -1,0 +1,53 @@
+{
+  "name": "idm",
+  "version": "1.0.0",
+  "description": "In Depth Music",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest --config jest.config.js",
+    "test:watch": "npm run test -- --watchAll --coverage=false",
+    "test:coverage": "npm run test -- --coverage=true",
+    "dev": "./node_modules/.bin/next dev",
+    "build": "./node_modules/.bin/next build",
+    "start": "./node_modules/.bin/next start",
+    "format": "./node_modules/.bin/prettier --write \"src/**/*.js\"",
+    "lint": "./node_modules/.bin/eslint \"./**/*.js\"",
+    "lint:fix": "./node_modules/.bin/eslint \"./**/*.js\" --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-personal:thulioph/idm.git"
+  },
+  "keywords": [],
+  "author": "Thulio Philipe",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
+    "next": "^9.5.4",
+    "node-fetch": "^2.6.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "reactstrap": "^8.6.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.1",
+    "@babel/preset-env": "^7.11.5",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.5.2",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "husky": "^4.3.0",
+    "jest": "^26.5.2",
+    "prettier": "^2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "./node_modules/.bin/commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run test && npm run lint"
+    }
+  }
+}
