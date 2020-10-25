@@ -1,4 +1,5 @@
 import development from './development'
+import production from './production'
 
 const getConfigFile = () => {
   const env = process.env.NODE_ENV
@@ -10,7 +11,7 @@ const getConfigFile = () => {
     return development
 
   if (env === 'production')
-    return {}
+    return production
 }
 
 export default getConfigFile()

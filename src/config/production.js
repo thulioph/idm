@@ -1,6 +1,6 @@
 export default {
   base: {
-    api: 'http://localhost:3000'
+    api: 'https://idm.vercel.app'
   },
   genius: {
     url: 'https://api.genius.com',

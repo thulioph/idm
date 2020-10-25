@@ -13,6 +13,8 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import config from '../config';
+
 function HomePage(props) {
   const [state, setState] = useState({});
   const [artist, setArtist] = useState('');
@@ -21,7 +23,7 @@ function HomePage(props) {
   const handleBtnClick = async () => {
     setState({});
 
-    const res = await fetch('http://localhost:3000/api/artist', {
+    const res = await fetch(`${config.base.api}/api/artist`, {
       method: 'POST',
       body: JSON.stringify({ artist }),
     });
