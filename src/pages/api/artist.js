@@ -1,5 +1,6 @@
 import GeniusAPI from '../../services/genius';
 import LastFmAPI from '../../services/lastfm';
+import WhoSampledAPI from '../../services/whosampled'
 
 const getArtistID = (query, arr) => {
   const element = arr.find(({ result }) => {
@@ -34,6 +35,14 @@ const searchFromLastFM = async (query) => {
   return { ...data, topTracks };
 };
 
+const searchFromWhoSampled = async (query) => {
+  const api = new WhoSampledAPI();
+
+  const data = await api.getArtistInfo(query);
+
+  return data;
+};
+
 export default async (req, res) => {
   const { artist } = JSON.parse(req.body)
 
@@ -41,6 +50,7 @@ export default async (req, res) => {
 
   const genius = await searchFromGenius(artist);
   const lastfm = await searchFromLastFM(artist);
+  const whoSampled = await searchFromWhoSampled(artist);
 
-  res.status(200).json({ genius, lastfm });
+  res.status(200).json({ genius, lastfm, whoSampled });
 };
