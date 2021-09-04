@@ -52,5 +52,6 @@ export default async (req, res) => {
   const lastfm = await searchFromLastFM(artist);
   const whoSampled = await searchFromWhoSampled(artist);
 
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.status(200).json({ genius, lastfm, whoSampled });
 };

@@ -23,7 +23,7 @@ function HomePage(props) {
   const handleBtnClick = async () => {
     setState({});
 
-    const res = await fetch(`${config.base.api}/api/artist`, {
+    const res = await fetch(`/api/artist`, {
       method: 'POST',
       body: JSON.stringify({ artist }),
     });

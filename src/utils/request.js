@@ -5,6 +5,7 @@ const request = async (URL = null, config = {}) => {
 
   const fetchConfig = {
     ...config,
+    mode: 'cors'
   }
 
   return await fetch(URL, fetchConfig)
