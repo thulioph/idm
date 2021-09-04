@@ -10,4 +10,7 @@ export default {
     url: 'https://ws.audioscrobbler.com/2.0',
     key: '09348b1f3d5b4f6be5f9002755bf0587',
   },
+  whoSampled: {
+    url: 'https://whosampled-scraper.herokuapp.com'
+  }
 };
