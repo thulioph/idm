@@ -17,8 +17,9 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import TableComponent from '../components/table';
-import ListGroupsComponent from '../components/list-groups';
+import { ListGroupsComponent, ListGroupsComponentTopTracks } from '../components/list-groups';
 import MediaComponent from '../components/media';
+import NavbarComponent from '../components/navbar';
 
 const LoadingState = () => {
   return (
@@ -66,7 +67,9 @@ function HomePage(props) {
 
   return (
     <React.Fragment>
-      <Container fluid>
+      <NavbarComponent />
+
+      <Container>
         <Head>
           <title>In Depth Music | IDM</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -76,28 +79,39 @@ function HomePage(props) {
           <h1 className="display-3">In Depth Music</h1>
           <p className="lead">Here is the best place to learn more about your favorite artist.</p>
 
-          <Form>
-            <FormGroup>
-              <Input
-                id="artist-name"
-                value={artist}
-                onChange={handleInputChange}
-                placeholder="Name of your favorite artist"
-              />
-            </FormGroup>
+          <Row>
+            <Col sm={{ size: '8', offset: 2 }}>
+              <Form>
+                <FormGroup>
+                  <Input
+                    id="artist-name"
+                    bsSize="lg"
+                    value={artist}
+                    onChange={handleInputChange}
+                    placeholder="Name of your favorite artist"
+                    autoComplete="off"
+                  />
+                </FormGroup>
 
-            <FormGroup>
-              <Button color="primary" onClick={handleBtnClick}>
-                search
-              </Button>
-            </FormGroup>
-          </Form>
+                <FormGroup>
+                  <Button
+                    color="primary"
+                    onClick={handleBtnClick}
+                    block
+                    size="lg"
+                  >
+                    search
+                  </Button>
+                </FormGroup>
+              </Form>
+            </Col>
+          </Row>
         </Jumbotron>
       </Container>
 
       <Container>
         <Row>
-          <Col>
+          <Col sm={{ offset: 6 }}>
             {isLoading && <LoadingState />}
           </Col>
         </Row>
@@ -116,7 +130,7 @@ function HomePage(props) {
 
         <Row>
           <Col>
-            {state.lastfm && <ListGroupsComponent title={'10 Top Tracks'} data={state.lastfm.topTracks} />}
+            {state.lastfm && <ListGroupsComponentTopTracks title={'10 Top Tracks'} data={state.lastfm.topTracks} />}
           </Col>
 
           <Col>
