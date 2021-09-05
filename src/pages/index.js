@@ -33,19 +33,23 @@ function HomePage(props) {
   const [artist, setArtist] = useState('');
   const [isLoading, setLoading] = useState(false);
 
-  const handleBtnClick = async () => {
+  const requestToAPI = async (payload) => {
     setState({});
-    setLoading(true)
+    setLoading(true);
 
     const res = await fetch(`/api/artist`, {
       method: 'POST',
-      body: JSON.stringify({ artist }),
+      body: JSON.stringify({ artist: payload }),
     });
 
     const data = await res.json();
 
     setState(data);
     setLoading(false);
+  }
+
+  const handleBtnClick = async () => {
+    await requestToAPI(artist);
   };
 
   const handleInputChange = (evt) => {
@@ -53,6 +57,11 @@ function HomePage(props) {
 
     setArtist(value);
     setState({});
+  };
+
+  const handleSimilarArtistClick = async (artistName) => {
+    setArtist(artistName);
+    await requestToAPI(artistName);
   };
 
   return (
@@ -111,7 +120,14 @@ function HomePage(props) {
           </Col>
 
           <Col>
-            {state.lastfm && <ListGroupsComponent title={'Similar Artists'} data={state.lastfm.similar} displayBadge={false} />}
+            {state.lastfm && 
+              <ListGroupsComponent
+                title={'Similar Artists'}
+                data={state.lastfm.similar}
+                displayBadge={false}
+                handleClick={handleSimilarArtistClick}
+              />
+            }
           </Col>
         </Row>
 

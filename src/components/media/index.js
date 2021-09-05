@@ -15,6 +15,28 @@ const defaultObj = {
 	'life-span': { begin: '', end: '', ended: false }
 }
 
+const formatDate = (dateString) => {
+	const [year, month, day] = dateString.split('-')
+	const formattedDate = `${month}/${day}/${year}`
+
+	const options = { year: 'numeric', month: 'long', day: 'numeric' }
+	const mainLang = 'pt-BR'
+
+	return new Date(formattedDate).toLocaleDateString(mainLang, options)
+}
+
+const calculateYears = (begin, end = null) => {
+	const [beginYear] = begin.split('-')
+
+	if (!end) {
+		return `(${new Date().getFullYear() - beginYear} years old)`
+	}
+
+	const [endYear] = end.split('-')
+
+	return `(${endYear - beginYear} years old)`
+}
+
 const MediaComponent = ({ lastfm, musicbrainz = defaultObj }) => {
 	const {
 		bio,
@@ -58,7 +80,7 @@ const MediaComponent = ({ lastfm, musicbrainz = defaultObj }) => {
 			<br />
 
 			<Alert color={ended ? 'danger' : 'success'}>
-				{begin} {end && `- ${end}`}
+				{formatDate(begin)} {end && `- ${formatDate(end)}`} | {calculateYears(begin, end)}
       </Alert>
 		</React.Fragment>
   );
