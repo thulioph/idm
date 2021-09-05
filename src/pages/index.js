@@ -154,7 +154,7 @@ function HomePage(props) {
 
         <Row>
           <Col>
-            {state.whoSampled && state.whoSampled.map((el, idx) => (
+            {state.whoSampled && state.whoSampled.length && state.whoSampled.map((el, idx) => (
               <TableComponent {...el} key={idx} />
             ))}
           </Col>
