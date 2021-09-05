@@ -1,6 +1,7 @@
 import GeniusAPI from '../../services/genius';
 import LastFmAPI from '../../services/lastfm';
-import WhoSampledAPI from '../../services/whosampled'
+import WhoSampledAPI from '../../services/whosampled';
+import MusicbrainzAPI from '../../services/musicbrainz';
 
 const getArtistID = (query, arr) => {
   const element = arr.find(({ result }) => {
@@ -43,6 +44,14 @@ const searchFromWhoSampled = async (query) => {
   return data;
 };
 
+const searchFromMusicBrainz = async (mbid) => {
+  const api = new MusicbrainzAPI();
+
+  const data = await api.getArtistInfo(mbid);
+
+  return data;
+};
+
 export default async (req, res) => {
   const { artist } = JSON.parse(req.body)
 
@@ -52,6 +61,13 @@ export default async (req, res) => {
   const lastfm = await searchFromLastFM(artist);
   const whoSampled = await searchFromWhoSampled(artist);
 
+  let musicbrainz
+
+  if (lastfm.mbid) {
+    console.warn('lastFM', lastfm.mbid)
+    musicbrainz = await searchFromMusicBrainz(lastfm.mbid)
+  }
+
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.status(200).json({ genius, lastfm, whoSampled });
+  res.status(200).json({ genius, lastfm, whoSampled, musicbrainz });
 };
